@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Xin chào, <span th:text="${user.fullName}">User</span></h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>Họ và tên</th>
+                <td th:text="${user.fullName}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr>
+                <th>Địa chỉ</th>
+                <td th:text="${user.address}"></td>
+            </tr>
+            <tr>
+                <th>Số điện thoại</th>
+                <td th:text="${user.telephone}"></td>
+            </tr>
+            <tr>
+                <th>Giới tính</th>
+                <td th:text="${user.gender ? 'Male' : 'Female'}"></td>
+            </tr>
+        </table>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

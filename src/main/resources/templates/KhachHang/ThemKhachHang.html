@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Thêm khách hàng</title>
+<!-- Thêm liên kết đến Bootstrap CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Thêm liên kết đến Animate CSS để thêm hiệu ứng -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script>
+	function validateForm() {
+		const soDienThoai = document.getElementById("soDienThoai").value;
+		const soDienThoaiPattern = /^\d{10}$/;
+
+		if (!soDienThoaiPattern.test(soDienThoai)) {
+			alert("Số điện thoại phải là số và có đúng 10 số.");
+			return false;
+		}
+
+		return true;
+	}
+</script>
+<style>
+body {
+	background: linear-gradient(to right, #ff7e5f, #feb47b);
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 30px;
+	max-width: 400px;
+}
+
+.form-group label {
+	font-weight: bold;
+}
+
+.btn-primary {
+	background: linear-gradient(to right, #ff7e5f, #feb47b);
+	border: none;
+}
+
+.btn-primary:hover {
+	background: linear-gradient(to right, #feb47b, #ff7e5f);
+}
+</style>
+</head>
+<body>
+	<div class="container animate__animated animate__fadeInDown">
+		<h1 class="text-center">Thêm khách hàng</h1>
+		<div th:if="${message}" class="alert alert-success" role="alert"
+			th:text="${message}"></div>
+		<div th:if="${err}" class="alert alert-danger" role="alert"
+			th:text="${err}"></div>
+		<form th:action="@{/khachhang/add}" th:object="${khachHang}"
+			method="post" onsubmit="return validateForm()">
+			<div class="form-group">
+				<label for="tenKhachHang">Họ và tên:</label> <input type="text"
+					id="tenKhachHang" th:field="*{tenKhachHang}" class="form-control"
+					required />
+			</div>
+			<div class="form-group">
+				<label for="soDienThoai">Số Điện Thoại:</label> <input type="text"
+					id="soDienThoai" th:field="*{soDienThoai}" class="form-control"
+					required />
+				<div th:if="${soDTError}" th:text="${soDTError}" class="text-danger"></div>
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label> <input type="email" id="email"
+					th:field="*{email}" class="form-control" required />
+				<div th:if="${emailError}" th:text="${emailError}"
+					class="text-danger"></div>
+			</div>
+			<div class="form-group">
+				<label for="ngaySinh">Ngày Sinh:</label> <input type="date"
+					id="ngaySinh" th:field="*{ngaySinh}" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="diaChi">Địa Chỉ:</label> <input type="text" id="diaChi"
+					th:field="*{diaChi}" class="form-control" required />
+			</div>
+			<button type="submit" class="btn btn-primary btn-block">Thêm</button>
+			<a href="/khachhang/list" class="btn btn-secondary btn-block">Quay lại</a>
+		</form>
+	</div>
+
+	<!-- Thêm liên kết đến Bootstrap JS và các phụ thuộc Popper.js và jQuery -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập Nhật Thú Cưng</title>
+    <!-- Thêm liên kết đến Bootstrap CSS để cải thiện giao diện -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Thêm liên kết đến Animate CSS để thêm hiệu ứng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 500px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+        }
+        .btn-secondary {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #185a9d, #43cea2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeInDown">
+        <h1 class="text-center">Cập Nhật Thú Cưng</h1>
+        <form action="/thucung/update" method="post" onsubmit="return validateForm()">
+            <input type="hidden" name="maThuCung" th:value="${thuCung.maThuCung}" />
+            <input type="hidden" name="khachHang.maKhachHang" th:value="${thuCung.khachHang.maKhachHang}" />
+
+            <div class="form-group">
+                <label for="khachHang">Khách Hàng:</label>
+                <input type="text" id="khachHang" name="khachHang" class="form-control" th:value="${thuCung.khachHang.tenKhachHang}" disabled />
+            </div>
+
+            <div class="form-group">
+                <label for="tenThuCung">Tên Thú Cưng:</label>
+                <input type="text" id="tenThuCung" name="tenThuCung" class="form-control" th:value="${thuCung.tenThuCung}" required />
+            </div>
+
+            <div class="form-group">
+                <label for="giongLoai">Giống Loài:</label>
+                <input type="text" id="giongLoai" name="giongLoai" class="form-control" th:value="${thuCung.giongLoai}" required />
+            </div>
+
+            <div class="form-group">
+                <label for="loai">Loại:</label>
+                <input type="text" id="loai" name="loai" class="form-control" th:value="${thuCung.loai}" required />
+            </div>
+
+            <div class="form-group">
+                <label for="ngaySinh">Ngày Sinh:</label>
+                <input type="date" id="ngaySinh" name="ngaySinh" class="form-control" th:value="${#dates.format(thuCung.ngaySinh, 'yyyy-MM-dd')}" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Cập Nhật</button>
+            <a href="/thucung/list" class="btn btn-secondary btn-block">Quay lại</a>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var ngaySinh = document.getElementById("ngaySinh").value;
+            var today = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại ở định dạng yyyy-mm-dd
+
+            if (ngaySinh > today) {
+                alert("Ngày sinh không được lớn hơn ngày hiện tại!");
+                return false; // Ngừng gửi form nếu ngày sinh không hợp lệ
+            }
+            return true; // Gửi form nếu ngày sinh hợp lệ
+        }
+    </script>
+
+    <!-- Thêm liên kết đến Bootstrap JS và các phụ thuộc Popper.js và jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

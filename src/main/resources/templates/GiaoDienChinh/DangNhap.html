@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <!-- Thêm liên kết đến Bootstrap CSS để cải thiện giao diện -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Thêm liên kết đến Animate CSS để thêm hiệu ứng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 400px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+        }
+        .btn-secondary {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #185a9d, #43cea2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeInDown">
+        <h1 class="text-center">Login</h1>
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Email:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>Chưa có tài khoản? <a th:href="@{/nguoidung/register}" class="btn btn-secondary">Đăng ký</a></p>
+        </div>
+    </div>
+
+    <!-- Thêm liên kết đến Bootstrap JS và các phụ thuộc Popper.js và jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

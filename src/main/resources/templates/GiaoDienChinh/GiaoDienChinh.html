@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trang Quản Lý - Phòng Khám Thú Y</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<style>
+body {
+	background: linear-gradient(to right, #43cea2, #185a9d);
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Arial', sans-serif;
+}
+
+.container-fluid {
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding-top: 30px;
+	overflow: hidden;
+}
+
+.sidebar {
+	background-color: #f4f4f4;
+	height: 100vh;
+	padding-top: 20px;
+	border-right: 2px solid #185a9d;
+}
+
+.sidebar-header h3 {
+	color: #185a9d;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.sidebar-nav .nav-item {
+	margin-bottom: 15px;
+}
+
+.sidebar-nav .nav-link {
+	color: #185a9d;
+	font-weight: bold;
+	padding: 10px;
+	transition: background-color 0.3s, color 0.3s;
+	border-radius: 5px;
+}
+
+.sidebar-nav .nav-link:hover {
+	background-color: #185a9d;
+	color: white;
+	transform: scale(1.05);
+}
+
+.content {
+	padding: 20px;
+	max-height: 100vh;
+	overflow-y: auto;
+}
+
+.dashboard-welcome h2 {
+	color: #185a9d;
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+.dashboard-welcome p {
+	color: #333;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.dashboard-welcome ul {
+	color: #333;
+	font-size: 1rem;
+}
+
+.animate__animated {
+	animation-duration: 1s;
+}
+
+.btn-custom {
+	background-color: #185a9d;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+}
+
+.btn-custom:hover {
+	background-color: #43cea2;
+}
+
+.sidebar-nav .nav-link i {
+	margin-right: 10px;
+}
+</style>
+</head>
+<body>
+
+	<div class="container-fluid animate__animated animate__fadeInDown">
+		<div class="row">
+			<aside class="col-md-3 sidebar bg-light p-3">
+				<div class="sidebar-header">
+					<h3>Dashboard</h3>
+				</div>
+				<nav class="sidebar-nav">
+					<ul class="nav flex-column">
+						<li class="nav-item"><a class="nav-link" href="/bacsi/list"
+							sec:authorize="hasRole('ROLE_ADMIN')"><i
+								class="fas fa-user-md"></i> Danh sách bác sĩ</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/lichkham/book" sec:authorize="hasRole('ROLE_ADMIN')"><i
+								class="fas fa-calendar-plus"></i> Đặt lịch khám</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/lichkham/list" sec:authorize="hasRole('ROLE_ADMIN')"><i
+								class="fas fa-calendar-check"></i> Danh sách lịch khám</a></li>
+						<li class="nav-item"><a class="nav-link" href="/thucung/list"
+							sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-paw"></i>
+								Danh sách thú cưng</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/khachhang/list" sec:authorize="hasRole('ROLE_ADMIN')"><i
+								class="fas fa-users"></i> Danh sách khách hàng</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/nguoidung/profile" sec:authorize="hasRole('ROLE_USER')"><i
+								class="fas fa-user"></i> Xem thông tin</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout"><i
+								class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+					</ul>
+				</nav>
+			</aside>
+
+			<main class="col-md-9 content">
+				<section class="dashboard-welcome">
+					<h2
+						class="text-center text-primary animate__animated animate__fadeIn">Xin
+						Chào!</h2>
+					<p
+						class="lead text-center animate__animated animate__fadeIn animate__delay-1s">
+						Chào mừng bạn đến với hệ thống quản lý phòng khám thú y của chúng
+						tôi. Chúng tôi luôn sẵn sàng đồng hành cùng bạn trong việc chăm
+						sóc thú cưng yêu quý của mình. Hãy cùng khám phá các tính năng và
+						dịch vụ tuyệt vời ngay dưới đây.</p>
+
+					<!-- Nội dung dành cho Admin -->
+					<div sec:authorize="hasRole('ROLE_ADMIN')"
+						class="animate__animated animate__fadeIn animate__delay-2s">
+						<div class="bg-light p-4 rounded shadow-sm mb-4"
+							style="background-color: #f0f8ff;">
+							<h3 class="text-success">Quản Lý Hệ Thống</h3>
+							<p class="text-muted">Với vai trò là quản trị viên, bạn sẽ có
+								quyền truy cập vào các chức năng quản lý mạnh mẽ giúp bạn dễ
+								dàng theo dõi và điều hành phòng khám. Bạn có thể:</p>
+							<ul>
+								<li><strong>Quản lý bác sĩ:</strong> Thêm, sửa, xóa bác sĩ
+									và tìm kiếm thông tin bác sĩ.</li>
+								<li><strong>Quản lý lịch khám:</strong> Tạo, cập nhật và
+									theo dõi các lịch khám cho thú cưng.</li>
+								<li><strong>Quản lý khách hàng và thú cưng:</strong> Thêm, cập
+									nhật, xoá thông tin khách hàng, kiểm tra sức khỏe thú cưng, và xử lý
+									các yêu cầu dịch vụ.</li>
+							</ul>
+							<p class="font-weight-bold">Hãy sử dụng các công cụ trong
+								thanh điều hướng bên trái để bắt đầu quản lý hệ thống hiệu quả
+								hơn.</p>
+						</div>
+					</div>
+
+					<!-- Nội dung dành cho User -->
+					<div sec:authorize="hasRole('ROLE_USER')"
+						class="animate__animated animate__fadeIn animate__delay-2s">
+						<div class="bg-light p-4 rounded shadow-sm mb-4"
+							style="background-color: #fff5e6;">
+							<h3 class="text-info">Chăm Sóc Thú Cưng Cùng Chúng Tôi</h3>
+							<p class="text-muted">Phòng khám thú y của chúng tôi cung cấp
+								dịch vụ chăm sóc sức khỏe toàn diện cho thú cưng của bạn. Chúng
+								tôi cam kết mang đến dịch vụ tốt nhất với đội ngũ bác sĩ giàu
+								kinh nghiệm và tận tâm.</p>
+							<p>Bạn có thể tận hưởng các dịch vụ sau:</p>
+							<ul>
+								<li><strong>Đặt lịch khám:</strong> Lên lịch khám cho thú
+									cưng của bạn và nhận lời khuyên từ bác sĩ thú y.</li>
+								<li><strong>Kiểm tra thông tin cá nhân:</strong> Xem và cập
+									nhật thông tin cá nhân, lịch sử khám bệnh của thú cưng.</li>
+								<li><strong>Tư vấn trực tiếp:</strong> Liên hệ với bác sĩ
+									để nhận sự tư vấn, giải đáp mọi thắc mắc về sức khỏe thú cưng.</li>
+							</ul>
+							<p class="font-weight-bold">Chúng tôi luôn ở đây để giúp bạn
+								chăm sóc và bảo vệ thú cưng của bạn tốt nhất. Hãy bắt đầu hành
+								trình chăm sóc sức khỏe cho thú cưng ngay hôm nay!</p>
+						</div>
+					</div>
+				</section>
+			</main>
+		</div>
+	</div>
+
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

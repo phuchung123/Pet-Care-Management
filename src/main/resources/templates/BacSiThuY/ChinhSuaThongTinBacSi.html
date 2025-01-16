@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chỉnh sửa thông tin bác sĩ</title>
+    <!-- Thêm liên kết đến Bootstrap CSS để cải thiện giao diện -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Thêm liên kết đến Animate CSS để thêm hiệu ứng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 600px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeInDown">
+        <h1 class="text-center">Chỉnh sửa thông tin bác sĩ</h1>
+        <form th:action="@{/bacsi/edit/{id}(id=${bacSi.maBacSi})}" th:object="${bacSi}" method="post">
+            <div class="form-group">
+                <label for="tenBacSi">Tên Bác Sĩ:</label>
+                <input type="text" id="tenBacSi" th:field="*{tenBacSi}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="gioiTinh">Giới Tính:</label>
+                <select id="gioiTinh" th:field="*{gioiTinh}" class="form-control" required>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ngaySinh">Ngày Sinh:</label>
+                <input type="date" id="ngaySinh" th:field="*{ngaySinh}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="ngayVaoLam">Ngày Vào Làm:</label>
+                <input type="date" id="ngayVaoLam" th:field="*{ngayVaoLam}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="soDienThoai">Số Điện Thoại:</label>
+                <input type="text" id="soDienThoai" th:field="*{soDienThoai}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="diaChi">Địa Chỉ:</label>
+                <input type="text" id="diaChi" th:field="*{diaChi}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Lưu Thay Đổi</button>
+            <br/>
+            <div class="text-center">
+				<a href="/bacsi/list" class="btn btn-secondary btn-block">Quay lại</a>
+			</div>
+        </form>
+    </div>
+
+    <!-- Thêm liên kết đến Bootstrap JS và các phụ thuộc Popper.js và jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

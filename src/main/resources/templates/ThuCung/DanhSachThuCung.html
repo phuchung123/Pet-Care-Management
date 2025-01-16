@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Thú Cưng</title>
+    <!-- Thêm liên kết đến Bootstrap CSS để cải thiện giao diện -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 800px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #185a9d, #43cea2);
+            transform: scale(1.05);
+        }
+
+        /* Thêm hiệu ứng cho bảng */
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        /* Thêm hiệu ứng cho các hàng trong bảng */
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Tạo hiệu ứng load mượt mà */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeInDown">
+        <h1 class="text-center text-primary">Danh Sách Thú Cưng</h1>
+        <div class="mb-3 text-center">
+            <a href="/" class="btn btn-primary">Quay lại trang chủ</a>
+            <a href="/thucung/add" class="btn btn-secondary">Thêm thú cưng</a>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Khách Hàng</th>
+                    <th>Tên Thú Cưng</th>
+                    <th>Giống Loài</th>
+                    <th>Loại</th>
+                    <th>Ngày Sinh</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="thuCung : ${thuCungs}">
+                    <tr>
+                        <td th:text="${thuCung.khachHang.tenKhachHang}"></td>
+                        <td th:text="${thuCung.tenThuCung}"></td>
+                        <td th:text="${thuCung.giongLoai}"></td>
+                        <td th:text="${thuCung.loai}"></td>
+                        <td th:text="${#dates.format(thuCung.ngaySinh, 'yyyy-MM-dd')}"></td>
+                        <td>
+                            <a th:href="@{/thucung/edit/{id}(id=${thuCung.maThuCung})}" class="btn btn-primary btn-sm">Sửa</a>
+                            <a th:href="@{/thucung/delete/{id}(id=${thuCung.maThuCung})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa thú cưng này?');">Xóa</a>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Thêm liên kết đến Bootstrap JS và các phụ thuộc Popper.js và jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
